@@ -2,6 +2,10 @@
 #include<GL/glut.h>
 #include<math.h>
 #include<time.h>
+#include <conio.h>
+
+
+
 
 #define PI 22.0/7.0
 
@@ -86,17 +90,56 @@ void init(){
     glEndList();
 
     glNewList(3,GL_COMPILE);
-        glColor3f(1,1,1);
         glBegin(GL_LINES);
-        for(theta=0;theta<=360;theta+=10){
+        for(theta=0;theta<=360;theta+=6){
             rad=theta*PI/180.0;
-            glVertex3d(cos(rad),sin(rad),0.02);
-            rad=(theta+10)*PI/180.0;
-            glVertex3d(cos(rad),sin(rad),-0.02);
+            glVertex3d(cos(rad),sin(rad),0.01);
+            rad=(theta+6)*PI/180.0;
+            glVertex3d(cos(rad),sin(rad),-0.01);
         }
         glEnd();
     glEndList();
 
+    glNewList(4,GL_COMPILE);
+        glBegin(GL_LINES);
+        for(theta=0;theta<=360;theta+=7){
+            rad=theta*PI/180.0;
+            glVertex3d(cos(rad),sin(rad),0.0);
+            rad=(theta+6)*PI/180.0;
+            glVertex3d(cos(rad),sin(rad),0.0);
+        }
+        glEnd();
+    glEndList();
+
+    glNewList(5,GL_COMPILE);
+        glBegin(GL_LINES);
+        for(theta=0;theta<=360;theta+=6){
+            rad=theta*PI/180.0;
+            glVertex3d(cos(rad),sin(rad),0.0);
+            rad=(theta+6)*PI/180.0;
+            glVertex3d(cos(rad),sin(rad),0.0);
+        }
+        glEnd();
+    glEndList();
+
+    glNewList(6,GL_COMPILE);
+        glBegin(GL_QUADS);
+        glVertex3d(0.3,0.4,0.0);
+        glVertex3d(0.3,0.6,0.0);
+        glVertex3d(-0.3,0.6,0.0);
+        glVertex3d(-0.3,0.4,0.0);
+
+        glVertex3d(0.3,-0.4,0.0);
+        glVertex3d(0.3,-0.6,0.0);
+        glVertex3d(-0.3,-0.6,0.0);
+        glVertex3d(-0.3,-0.4,0.0);
+
+        glVertex3d(0.1,0.5,0.0);
+        glVertex3d(0.1,-0.5,0.0);
+        glVertex3d(-0.1,-0.5,0.0);
+        glVertex3d(-0.1,0.5,0.0);
+        glEnd();
+    glEndList();
 
 }
 
@@ -108,7 +151,7 @@ void display(){
 
   glLoadIdentity();
 
-  glColor3f(0.6,0,0);
+  glColor3f(0.5,0,0);
 
   glRotatef(rotate_x,1.0,0.0,0.0);
   glRotatef(rotate_y,0.0,1.0,0.0);
@@ -119,26 +162,98 @@ void display(){
   // glScalef(scale,scale,scale);
   glCallList(2);
   glPopMatrix();
+
+  // glColor3f(0,0,0);
+  glColor3f(0.4,0,0);
+  glLineWidth(10);
+  glPushMatrix();
+  glTranslated(dist_x+0,0,0.0);
+  glCallList(4);
+  glPopMatrix();
+
+  glColor3f(245/255.0,245/255.0,162/205.0);
+  glLineWidth(2);
+  glPushMatrix();
+  glTranslated(dist_x+0,0,0.06);
+  glCallList(4);
+  glPopMatrix();
+
+  glLineWidth(2);
+  glPushMatrix();
+  glTranslated(dist_x+0,0,-0.06);
+  glCallList(4);
+  glPopMatrix();
+
+  glLineWidth(5);
+  glPushMatrix();
+  glTranslated(dist_x+0,0,-0.15);
+  glScalef(0.99,0.99,1);
+  glCallList(3);
+  glPopMatrix();
+
+  glLineWidth(5);
+  glPushMatrix();
+  glTranslated(dist_x+0,0,-0.25);
+  glScalef(0.966,0.966,1);
+  glCallList(3);
+  glPopMatrix();
+
+  glLineWidth(5);
+  glPushMatrix();
+  glTranslated(dist_x+0,0,0.15);
+  glScalef(0.99,0.99,1);
+  glCallList(3);
+  glPopMatrix();
+
+  glLineWidth(5);
+  glPushMatrix();
+  glTranslated(dist_x+0,0,0.25);
+  glScalef(0.966,0.966,1);
+  glCallList(3);
+  glPopMatrix();
+
+
+  glColor3f(220/255.0,190/255.0,55/255.0);
+  glLineWidth(2);
+  glPushMatrix();
+  glTranslated(dist_x+0,0,0.82);
+  glScalef(0.57,0.57,1);
+  glCallList(5);
+  glPopMatrix();
+
+  glLineWidth(2);
+  glPushMatrix();
+  glTranslated(dist_x+0,0,0.84);
+  glScalef(0.55,0.55,1);
+  glCallList(5);
+  glPopMatrix();
+
+  glLineWidth(2);
+  glPushMatrix();
+  glTranslated(dist_x+0,0,-0.82);
+  glScalef(0.57,0.57,1);
+  glCallList(5);
+  glPopMatrix();
   
-  glLineWidth(3);
+  glLineWidth(2);
   glPushMatrix();
-  glTranslated(dist_x+0,0,0);
-  // glScalef(0.9,0.9,0.9);
-  glCallList(3);
+  glTranslated(dist_x+0,0,-0.84);
+  glScalef(0.54,0.54,1);
+  glCallList(5);
   glPopMatrix();
 
-  glLineWidth(3);
+  glLineWidth(20);
   glPushMatrix();
-  glTranslated(dist_x+0,0,-0.12);
-  // glScalef(0.9,0.9,0.9);
-  glCallList(3);
+  glTranslated(dist_x+0,0,-0.99);
+  glScalef(0.54,0.5,0.1);
+  glCallList(6);
   glPopMatrix();
 
-  glLineWidth(3);
+  glLineWidth(20);
   glPushMatrix();
-  glTranslated(dist_x+0,0,0.12);
-  // glScalef(1,1,1);
-  glCallList(3);
+  glTranslated(dist_x+0,0,0.99);
+  glScalef(0.54,0.5,0.1);
+  glCallList(6);
   glPopMatrix();
 
   glFlush();
@@ -164,15 +279,6 @@ void idle(){
     rotate_z+=.1;
 
     dist_x+=0.5;
-    
-
-    // color_b=(color_b+1)%255;
-    // color_g=(color_g+1)%255;
-
-    // color_r=(color_r+1)%255;
-    
-
-    delay(500);
 
     glutPostRedisplay();
 }
@@ -203,7 +309,7 @@ int main(int argc,char **argv){
   glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE | GLUT_DEPTH);
   glutInitWindowPosition(0,0);
   glutInitWindowSize(1024,768);
-  glutCreateWindow("Cricket Ground");
+  glutCreateWindow("Cricket Ball");
   init();
   glEnable(GL_DEPTH_TEST);
   glutDisplayFunc(display);
